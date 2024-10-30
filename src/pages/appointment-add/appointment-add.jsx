@@ -14,7 +14,7 @@ function AppointmentAdd() {
                 <div className="col-12 mt-2">
                     <h2>
                         {
-                            id_appointment > 0 ? "Editar Agendamento" : " Novo Agendamento"
+                            id_appointment > 0 ? "Editar Agendamento" : "Novo Agendamento"
                         }
                     </h2>
                 </div>
