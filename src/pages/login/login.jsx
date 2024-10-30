@@ -27,6 +27,7 @@ function Login() {
                 localStorage.setItem("sessionId", response.data.id_user);
                 localStorage.setItem("sessionEmail", response.data.email);
                 localStorage.setItem("sessionName", response.data.name);
+                api.defaults.headers.common['Authorization'] = "Bearer" + response.data.token;
                 navigate("/appointments");
                 
             } else {
@@ -69,7 +70,7 @@ function Login() {
                 {
                     msg.length > 0 &&
                         <div className="alert alert-danger" role="alert">
-                            Ocorreu um erro.
+                            {msg}
                         </div>
                 }
 

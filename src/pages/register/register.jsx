@@ -3,6 +3,7 @@ import "./register.css";
 import logo from "../../assets/logo.png";
 import fundo from "../../assets/fundo.png";
 import { useState } from "react";
+import api from "../../constants/api.js";
 
 function Register() {
 
@@ -17,8 +18,12 @@ function Register() {
 
         setMsg("");
 
+        if  (password != password2)
+            return setMsg("As senhas não conferem. Digite novamente.")
+
         try {
-            const response = await api.post("/users/login", {
+            const response = await api.post("/users/register", {
+                name,
                 email,
                 password
             });
@@ -26,20 +31,22 @@ function Register() {
             if (response.data) {
                 localStorage.setItem("sessionToken", response.data.token);
                 localStorage.setItem("sessionId", response.data.id_user);
-                localStorage.setItem("sessionEmail", response.data.email);
-                localStorage.setItem("sessionName", response.data.name);
+                localStorage.setItem("sessionEmail", email);
+                localStorage.setItem("sessionName", name);
+                api.defaults.headers.common['Authorization'] = "Bearer" + response.data.token;
                 navigate("/appointments");
                 
             } else {
-                setMsg("Erro ao efetuar login. Tente novamente mais tarde.");
+                setMsg("Erro ao criar conta. Tente novamente mais tarde.");
             }
             
         } catch (error) {
+            console.log(error);
+            
             if (error.response?.data.error)
                 setMsg(error.response?.data.error);
             else  
-                setMsg("Erro ao efetuar login. Tente novamente mais tarde.");
-               // console.log(error);
+                setMsg("Erro ao criar conta. Tente novamente mais tarde.");
         }
         
 
@@ -74,7 +81,7 @@ function Register() {
                         onChange={(e) => setPassword2(e.target.value)} />
                 </div>
                 <div className="mt-3 mb-5">
-                    <button onClick={ExecuteAccount} className="btn btn-primary w-100">
+                    <button onClick={ExecuteAccount} className="btn btn-primary w-100" type="button">
                         Criar minha conta
                     </button>
                 </div>
@@ -82,7 +89,7 @@ function Register() {
                 {
                     msg.length > 0 &&
                         <div className="alert alert-danger" role="alert">
-                            Ocorreu um erro.
+                            {msg}
                         </div>
                 }
 
