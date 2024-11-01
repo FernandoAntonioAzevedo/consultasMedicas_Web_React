@@ -74,7 +74,7 @@ export const appointments = [
         specialty: "Pediatria",
         booking_date: "2024-10-28",
         booking_hour: "15:40",
-        user: "Clarice Oliveira Stein",
+        user: "Heber Stein Mazutti",
         price: 400
     },
     {
@@ -104,7 +104,7 @@ export const appointments = [
         specialty: "Pediatria",
         booking_date: "2024-12-02",
         booking_hour: "10:40",
-        user: "Suellen Malveis ",
+        user: "Heber Stein Mazutti",
         price: 150
     },
     {
@@ -114,7 +114,7 @@ export const appointments = [
         specialty: "Clínica Geral",
         booking_date: "2024-12-14",
         booking_hour: "17:30",
-        user: "Maiara de Assis Azevedo",
+        user: "Heber Stein Mazutti",
         price: 300
     }
 ]
